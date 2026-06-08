@@ -11,7 +11,6 @@ interface Link extends Document {
 const linkSchema: Schema<Link> = new Schema({
     shortenedURL: {
         type: String,
-        required: true,
         unique: true
     },
     uploadedURL: {

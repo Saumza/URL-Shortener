@@ -5,8 +5,7 @@ import type { Response, Request, NextFunction } from "express"
 import { z } from "zod"
 
 export const uploadedURLValidate = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-
-    const { uploadedURL } = req.body()
+    const { uploadedURL } = req.body
 
     const verifyURL = {
         uploadedURL

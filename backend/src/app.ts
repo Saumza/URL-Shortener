@@ -19,6 +19,10 @@ app.use(express.json({
     limit: "100kb"
 }))
 
+//routes
 
+import { uploadURLRouter } from "./routes/link.route.js"
+
+app.use("/api/upload", uploadURLRouter)
 
 export { app }
