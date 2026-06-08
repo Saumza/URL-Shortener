@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 
-class APIError extends AxiosError {
+class APIError extends Error {
     public status: number;
     constructor(status: number, message: string) {
         super(message)

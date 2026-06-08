@@ -10,7 +10,7 @@ export const asyncHandler = <P>(requestHandler: handler<P>): RequestHandler<P> =
     try {
         return await requestHandler(req, res, next)
     } catch (error: any) {
-        res.status(error.statusCode || 500)
+        res.status(error.status || 500)
             .json({
                 success: false,
                 message: error.message
