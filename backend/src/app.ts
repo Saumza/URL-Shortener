@@ -25,6 +25,6 @@ import { uploadURLRouter } from "./routes/link.route.js"
 import { redirectURLRoute } from "./routes/urlRedirection.route.js"
 
 app.use("/api/upload", uploadURLRouter)
-app.use("/api", redirectURLRoute)
+app.use("", redirectURLRoute)
 
 export { app }
