@@ -5,5 +5,5 @@ export const verifyUploadedURL = z.object({
 })
 
 export const verifyShortenedURL = z.object({
-    shortenedURL: z.string().max(20, { message: "Not a valid URL" })
+    shortenedId: z.string().max(40, { message: "Not a valid URL" })
 })

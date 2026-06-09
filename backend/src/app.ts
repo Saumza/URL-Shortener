@@ -22,7 +22,9 @@ app.use(express.json({
 //routes
 
 import { uploadURLRouter } from "./routes/link.route.js"
+import { redirectURLRoute } from "./routes/urlRedirection.route.js"
 
 app.use("/api/upload", uploadURLRouter)
+app.use("/api", redirectURLRoute)
 
 export { app }
