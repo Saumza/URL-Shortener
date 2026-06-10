@@ -36,7 +36,7 @@ const shortenURL = asyncHandler(async (req: Request, res: Response) => {
     const shortenedURL = `https://shortly/${link.shortenedId}`
 
     return res.status(201).json(
-        new APIResponse(201, "Link Shortened Successfully", { shortenedURL })
+        new APIResponse(201, "Link Shortened Successfully", shortenedURL)
     )
 })
 

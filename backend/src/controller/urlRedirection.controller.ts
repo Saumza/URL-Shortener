@@ -10,9 +10,17 @@ const redirectURL = asyncHandler(async (req: Request<ShortenedURLParams>, res: R
 
     const { shortenedId } = req.params
 
-    const findURL = await LinkModel.findOne({
-        shortenedId
-    })
+    const findURL = await LinkModel.findOneAndUpdate(
+        {
+            shortenedId
+        },
+        {
+            $inc: { urlClicks: 1 }
+        },
+        {
+            returnDocument: "after"
+        }
+    )
 
     if (!findURL) {
         throw new APIError(404, "URL Not Found")

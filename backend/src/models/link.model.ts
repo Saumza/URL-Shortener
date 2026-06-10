@@ -21,7 +21,7 @@ const linkSchema: Schema<Link> = new Schema({
         type: Number,
         required: true
     }
-})
+}, { timestamps: true })
 
 
 

@@ -1,12 +1,8 @@
-interface data {
-    shortenedURL: string
-}
-
 export class APIResponse {
     public status: number
     public message: string
-    public data: data
-    constructor(status: number, message: string, data: data) {
+    public data: any
+    constructor(status: number, message: string, data: any) {
         this.status = status
         this.message = message
         this.data = data
