@@ -24,7 +24,7 @@ app.use(express.json({
 import { uploadURLRouter } from "./routes/link.route.js"
 import { redirectURLRoute } from "./routes/urlRedirection.route.js"
 
-app.use("/api/upload", uploadURLRouter)
+app.use("/api", uploadURLRouter)
 app.use("", redirectURLRoute)
 
 export { app }
