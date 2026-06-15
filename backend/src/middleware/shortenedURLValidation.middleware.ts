@@ -15,7 +15,7 @@ export const shortenedURLValidate = asyncHandler(async (req: Request<ShortenedUR
     }
 
     const result = verifyShortenedURL.safeParse(verifyURL)
-    console.log(result);
+    console.log("Validation:", result);
 
     if (!result.success) {
         const codeError = z.treeifyError(result.error)
