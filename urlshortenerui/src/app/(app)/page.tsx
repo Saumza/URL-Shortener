@@ -1,21 +1,24 @@
+import Form from "@/components/Form";
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="items-center justify-center bg-black text-white">
       <nav className='p-6 px-25'>
         <div className='flex items-center justify-between'>
-          <a href='/' className='font-outfit text-4xl font-bold'>
+          <Link href='/' className='font-outfit text-4xl font-bold'>
             Shortly
-          </a>
+          </Link>
           <div className='flex gap-10'>
-            <a href='#feature_section' className='font-outfit text-lg font-medium'>
+            <Link href='#feature_section' className='font-outfit text-lg font-medium'>
               Features
-            </a>
-            <a href="#faq_section" className='font-outfit text-lg font-medium'>
+            </Link>
+            <Link href="#faq_section" className='font-outfit text-lg font-medium'>
               FAQ
-            </a>
-            <a href="/" className='font-outfit text-lg font-medium'>
-              Plans
-            </a>
+            </Link>
+            <Link href="/" className='font-outfit text-lg font-medium'>
+              Analytics
+            </Link>
           </div>
         </div>
       </nav>
@@ -28,6 +31,9 @@ export default function Home() {
           <h2 className='text-6xl font-outfit font-semibold tracking-wide text-secondary'>Elevate Sharings</h2>
           <p className='font-outfit font-light mt-3 w-115 p-2 text-center text-gray-300 '>Transform long, cluttered URLs into clean and memorable links in just a click</p>
         </section>
+      </div>
+      <div>
+        <Form />
       </div>
     </div>
   );
