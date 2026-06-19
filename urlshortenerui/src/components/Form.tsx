@@ -65,7 +65,7 @@ function Form() {
 
     return (
         <>
-            <div className="mt-10 px-25">
+            <div className="mt-10 px-30">
                 <section className="border border-white/20 px-12 py-10 bg-gray-800/18 rounded-xl">
                     <form onSubmit={handleSubmit(submitHandler)}>
                         <FieldGroup className="flex-row items-center gap-3">
