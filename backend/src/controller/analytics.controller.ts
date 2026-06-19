@@ -49,7 +49,7 @@ const urlAnalytics = asyncHandler(async (req: Request<ShortenedURLParams>, res: 
         throw new APIError(404, "Url Not Found")
     }
 
-    return res.status(201).json(new APIResponse(201, "Analytics Fetched Successfully", user.urlClicks))
+    return res.status(201).json(new APIResponse(201, "Analytics Fetched Successfully", user))
 })
 
 

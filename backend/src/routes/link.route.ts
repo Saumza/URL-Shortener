@@ -6,6 +6,6 @@ import { urlAnalytics } from "../controller/analytics.controller.js";
 const router = Router()
 
 router.route("/uploadURL").post(uploadedURLValidate, shortenURL)
-router.route("/analytics").get(urlAnalytics)
+router.route("/analytics/:shortenedId").get(urlAnalytics)
 
 export { router as uploadURLRouter }

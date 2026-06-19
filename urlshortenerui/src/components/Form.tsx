@@ -19,7 +19,7 @@ import { CircleCheckIcon } from "@animateicons/react/lucide"
 function Form() {
 
     const [returnedUrl, setReturnedUrl] = useState("")
-    const [exampleUrl, setExampleUrl] = useState(["https://github.com", "https://www.youtube.com", "https://arxiv.org/"])
+    const [exampleUrl, setExampleUrl] = useState(["https://github.com", "https://www.youtube.com", "https://arxiv.org"])
 
     const urlRef = useRef(null)
 
@@ -40,7 +40,10 @@ function Form() {
         onSuccess: (response) => {
             setReturnedUrl(response.data.data)
             toast.success("Success", {
-                description: response.data.message
+                description: response.data.message,
+                classNames: {
+                    description: "!text-black"
+                },
             })
         },
         onError: (error) => {
@@ -60,6 +63,10 @@ function Form() {
                 description: "!text-black"
             },
         })
+    }
+
+    const redirectLocation = () => {
+        window.location.replace(returnedUrl)
     }
 
 
@@ -119,10 +126,10 @@ function Form() {
                 </section >
                 {
                     returnedUrl ?
-                        <div className="border border-white mt-6 px-12 py-6 flex items-center justify-between">
+                        <div className="border border-white/20 bg-gray-800/18 rounded-xl mt-6 px-12 py-6 flex items-center justify-between">
                             <div className="flex items-center gap-8">
                                 <CircleCheckIcon color="#c96442" size={70} duration={1} className="animate-in" />
-                                <div className="flex flex-col gap-1">
+                                <div className="flex flex-col gap-2">
                                     <p className="font-outfit text-primary">Your link is ready!</p>
                                     <Input ref={urlRef} value={returnedUrl} readOnly className="font-outfit !text-3xl border-0 px-0" />
 
@@ -137,6 +144,7 @@ function Form() {
                                     Copy
                                 </Button>
                                 <Button
+                                    onClick={redirectLocation}
                                     className="bg-black border border-white/20 hover:bg-muted-foreground/20 px-6 h-20 text-lg font-normal font-outfit text-primary"
                                 >
                                     <ExternalLink color="#c96442" />
