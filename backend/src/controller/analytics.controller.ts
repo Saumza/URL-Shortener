@@ -24,7 +24,7 @@ const urlAnalytics = asyncHandler(async (req: Request<ShortenedURLParams>, res: 
 
         const findURL = await LinkModel.findOne({
             shortenedId
-        }).lean()
+        }).select("-updatedAt -__v").lean()
 
         if (!findURL) {
             throw new APIError(404, "URL Not Available")

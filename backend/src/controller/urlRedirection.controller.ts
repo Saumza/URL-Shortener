@@ -28,7 +28,7 @@ const redirectURL = asyncHandler(async (req: Request<ShortenedURLParams>, res: R
             {
                 $inc: { urlClicks: 1 }
             }
-        ).select("-createdAt -updatedAt -__v").lean()
+        ).select("-updatedAt -__v").lean()
 
         if (!findURL) {
             throw new APIError(404, "URL Not Found")
@@ -49,7 +49,7 @@ const redirectURL = asyncHandler(async (req: Request<ShortenedURLParams>, res: R
     }
 
 
-    await redis.hincrby(urlKey, "urlClick", 1)
+    await redis.hincrby(urlKey, "urlClicks", 1)
 
     if (!user.uploadedURL) {
         console.log("Redis Error")
