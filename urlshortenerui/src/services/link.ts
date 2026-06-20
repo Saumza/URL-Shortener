@@ -1,4 +1,4 @@
-import axios, { isAxiosError } from "axios";
+import axios from "axios";
 
 class linkService {
     private baseUrl: string
@@ -14,9 +14,9 @@ class linkService {
         }
     }
 
-    async urlAnalytics<T>({ shortenedId }: { shortenedId: string }) {
+    async urlAnalytics<T>({ shortenedUrl }: { shortenedUrl: string }) {
         try {
-            return await axios.get<T>(`${this.baseUrl}/api/analytics/${shortenedId}`)
+            return await axios.get<T>(`${this.baseUrl}/api/analytics`, { params: { shortenedUrl } })
         } catch (error) {
             throw error
         }

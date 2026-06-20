@@ -4,18 +4,40 @@ import { APIResponse } from "../utils/APIResponse.js";
 import { APIError } from "../utils/APIError.js";
 import type { Request, Response } from "express";
 import { LinkModel } from "../models/link.model.js";
-import type { ShortenedURLParams } from "../middleware/shortenedURLValidation.middleware.js";
 import { ShortenedUrlKey } from "../utils/RedisKey.js";
 import { redis } from "../db/redisConnect.js";
 
 
-const urlAnalytics = asyncHandler(async (req: Request<ShortenedURLParams>, res: Response) => {
+const returnShortenedId = ({ shortenedUrl }: { shortenedUrl: string }) => {
+    const userUrl = shortenedUrl
 
-    const { shortenedId } = req.params
+    let url
 
+    if (!(userUrl.startsWith("https://") || userUrl.startsWith("http://"))) {
+        url = new URL(`https://${userUrl}`)
+    }
+    else {
+        url = new URL(userUrl)
+    }
+
+    const pathname = String(url.pathname).split("/")[1]
+    return pathname
+}
+
+
+const urlAnalytics = asyncHandler(async (req: Request, res: Response) => {
+
+    const { shortenedUrl } = req.urlQuery
+
+    // if (!shortenedUrl.includes('')) {
+    //     throw new APIError(402, "Invalid Url")
+    // }
+
+    const shortenedId = returnShortenedId({ shortenedUrl })
     if (!shortenedId) {
         throw new APIError(400, "ShortenedURL not Received")
     }
+
 
     const urlKey = ShortenedUrlKey(shortenedId)
     const user = await redis.hgetall(urlKey)

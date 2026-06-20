@@ -13,44 +13,29 @@ import { link } from "@/services/link.ts"
 import { Spinner } from './ui/spinner'
 import { toast } from "sonner"
 import { Calendar, CalendarDaysIcon, Link } from 'lucide-react'
+import { UrlData } from '@/types/UrlData'
 
 
 function AnalyticsForm() {
 
-    const [urlFound, setUrlFound] = useState()
+    const [urlFound, setUrlFound] = useState<UrlData>()
 
     const verifyShortenedURL = z.object({
-        shortenedId: z.string().max(40, { message: "Not a valid URL" })
+        shortenedUrl: z.string().max(40, { message: "Not a valid URL" })
     })
 
     const { handleSubmit, control, } = useForm<z.infer<typeof verifyShortenedURL>>({
         resolver: zodResolver(verifyShortenedURL),
         defaultValues: {
-            shortenedId: ""
+            shortenedUrl: ""
         }
     })
 
-    const returnShortenedId = ({ shortenedId }: { shortenedId: string }) => {
-        const userUrl = shortenedId
-        let url
 
-        if (!(userUrl.startsWith("https://") || userUrl.startsWith("http://"))) {
-            url = new URL(`https://${userUrl}`)
-        }
-        else {
-            url = new URL(userUrl)
-        }
-
-        const pathname: string = String(url.pathname).split("/")[1]
-        return pathname
-    }
 
     const submitHandler = async (data: z.infer<typeof verifyShortenedURL>) => {
-
-        const shortenedId = returnShortenedId(data)
-
         try {
-            const response = await link.urlAnalytics<APIResponse>({ shortenedId })
+            const response = await link.urlAnalytics<APIResponse>(data)
             setUrlFound(response.data.data)
             toast.success("Success",
                 {
@@ -62,6 +47,7 @@ function AnalyticsForm() {
             )
         } catch (error) {
             if (isAxiosError(error)) {
+                console.log(error.response)
                 toast.error(error.response?.data.message)
             }
         }
@@ -109,7 +95,7 @@ function AnalyticsForm() {
                                 <form onSubmit={handleSubmit(submitHandler)}>
                                     <FieldGroup className="flex-row items-center gap-3">
                                         <Controller
-                                            name="shortenedId"
+                                            name="shortenedUrl"
                                             control={control}
                                             render={({ field, fieldState }) => (
                                                 <Field data-invalid={fieldState.invalid}>
@@ -118,7 +104,7 @@ function AnalyticsForm() {
                                                         aria-invalid={fieldState.invalid}
                                                         placeholder="Paste your long URL Here...."
                                                         type="text"
-                                                        className="p-10 font-outfit focus-visible:border-2 !text-xl bg-black border-white/20"
+                                                        className="p-10 font-outfit focus-visible:border-2 text-xl! bg-black border-white/20"
                                                     />
                                                     {fieldState.invalid && (
                                                         <FieldError className="font-outfit" errors={[fieldState.error]} />
