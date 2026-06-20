@@ -19,6 +19,7 @@ import { UrlData } from '@/types/UrlData'
 function AnalyticsForm() {
 
     const [urlFound, setUrlFound] = useState<UrlData>()
+    const [isFetching, setIsFetching] = useState(false)
 
     const verifyShortenedURL = z.object({
         shortenedUrl: z.string().max(40, { message: "Not a valid URL" })
@@ -34,6 +35,7 @@ function AnalyticsForm() {
 
 
     const submitHandler = async (data: z.infer<typeof verifyShortenedURL>) => {
+        setIsFetching(true)
         try {
             const response = await link.urlAnalytics<APIResponse>(data)
             setUrlFound(response.data.data)
@@ -45,11 +47,13 @@ function AnalyticsForm() {
                     },
                 }
             )
+            setIsFetching(false)
         } catch (error) {
             if (isAxiosError(error)) {
                 console.log(error.response)
                 toast.error(error.response?.data.message)
             }
+            setIsFetching(false)
         }
     }
 
@@ -112,8 +116,8 @@ function AnalyticsForm() {
                                                 </Field>
                                             )}
                                         />
-                                        <Button type="submit" className='w-40 font-outfit h-20 text-xl' >
-                                            Shorten Link
+                                        <Button type="submit" className='w-40 font-outfit h-20 text-xl' disabled={isFetching} >
+                                            Fetch Analytics
                                         </Button>
                                     </FieldGroup>
                                 </form>
