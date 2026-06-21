@@ -1,0 +1,45 @@
+version: '5.7'
+
+services:
+  server:
+    image: backend_service
+    build: ./backend
+    env_file:
+      - ./backend/.env
+    container_name: express_server
+    ports:
+      - 8001:8001
+    networks:
+      - urlShortener
+    restart: unless-stopped
+  client:
+    image: client_service
+    build: ./urlshortenerui
+    env_file:
+      - ./urlshortenerui/.env
+    container_name: nextjs_server
+    depends_on:
+      - server
+    ports:
+      - 3000:3000
+    networks:
+      - urlShortener
+    restart: unless-stopped
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+    command: [ "redis-server", "--appendonly", "yes" ]
+    volumes:
+      - redis-data:/data
+    networks:
+      - urlShortener
+
+volumes:
+  redis-data:
+
+networks:
+  urlShortener:
+    driver: bridge
+

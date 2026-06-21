@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-COPY .env.production ./
+COPY .env.production.sample ./
 RUN npm run build
 
 

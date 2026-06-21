@@ -9,6 +9,9 @@ dotenv.config({
 })
 
 connectDB().then(() => {
+    console.log(process.env.REDIS_URL)
+    console.log(process.env.MONGODB_URI)
+    
     mongoose.connection.on("error", () => {
         console.log("DataBase isn't connected")
     })

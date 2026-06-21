@@ -12,7 +12,7 @@ FROM node:22-alpine
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package*.json ./
-COPY --from=builder /app/dist ./dist
 RUN npm ci --only=production
+COPY --from=builder /app/dist ./dist
 EXPOSE 8001
 CMD [ "npm","run","start" ]
