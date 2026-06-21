@@ -27,6 +27,9 @@ const redirectURL = asyncHandler(async (req: Request<ShortenedURLParams>, res: R
             },
             {
                 $inc: { urlClicks: 1 }
+            },
+            {
+                returnDocument: "after"
             }
         ).select("-updatedAt -__v").lean()
 
@@ -44,7 +47,9 @@ const redirectURL = asyncHandler(async (req: Request<ShortenedURLParams>, res: R
         }
 
 
+        await redis.multi().hset(urlKey, findURL).expire(urlKey,600).exec()
         await redis.hset(urlKey, findURL)
+        await redis.expire(urlKey,600)
         return res.redirect(302, findURL.uploadedURL)
     }
 
