@@ -80,10 +80,15 @@ Environment Variable's
 Create an .env file
 
 Add the following env's
+
 PORT
+
 MONGODB_URI
+
 REDIS_URL
+
 CORS_ORIGIN
+
 WEBSITE_URL
 
 npm run dev
@@ -100,16 +105,20 @@ Environment Variable's
 Create an .env file
 
 Add the following env's
+
 BACKEND_API_URL
+
 NEXT_PUBLIC_WEBSITE_URL 
 
 npm run dev
 
 
 Build and Run with Docker
+
 docker compose up --build
 
 Run in detached Mode
+
 docker compose up --build -d
 
 
