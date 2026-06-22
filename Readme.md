@@ -40,25 +40,25 @@ ShortCode Generation Process
 
 Project Structure
 
-client/ 
-    ├── components/ 
-    ├── pages/ 
-    ├── hooks/ 
-    ├── services/ 
-    ├── stores/ 
-    ├── routes/
-    └── dockerfile
-server/ 
-    ├── controllers/ 
-    ├── models/ 
-    ├── routes/ 
-    ├── middlewares/ 
-    ├── services/ 
-    ├── providers/ 
-    ├── utils/
-    └── dockerfile
-Docker-compose.yml
-Readme.md
+    client/ 
+        ├── components/ 
+        ├── pages/ 
+        ├── hooks/ 
+        ├── services/ 
+        ├── stores/ 
+        ├── routes/
+        └── dockerfile
+    server/ 
+        ├── controllers/ 
+        ├── models/ 
+        ├── routes/ 
+        ├── middlewares/ 
+        ├── services/ 
+        ├── providers/ 
+        ├── utils/
+        └── dockerfile
+    Docker-compose.yml
+    Readme.md
 
 
 Installation
