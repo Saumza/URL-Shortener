@@ -63,13 +63,15 @@ Project Structure
 
 Installation
 
-git clone <repository-url>
+git clone repository-url
+
 cd project-name
 
 
 Backend Setup 
 
 cd server
+
 npm install
 
 
