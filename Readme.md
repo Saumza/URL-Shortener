@@ -39,6 +39,7 @@ ShortCode Generation Process
 
 
 Project Structure
+
 client/ 
     ├── components/ 
     ├── pages/ 
